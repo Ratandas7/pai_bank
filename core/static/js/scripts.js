@@ -41,6 +41,8 @@ document.addEventListener('click', (event) => {
 const message_btn = document.getElementById('message_btn');
 const message_modal = document.getElementById('message_modal');
 
-message_btn.addEventListener('click', () => {
-    message_modal.classList.add('hidden');
-});
+if (message_btn && message_modal) {
+    message_btn.addEventListener('click', () => {
+        message_modal.classList.add('hidden');
+    });
+}
