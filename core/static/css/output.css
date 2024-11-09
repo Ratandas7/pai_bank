@@ -1214,6 +1214,14 @@ video {
 .ring-white\/10 {
   --tw-ring-color: rgb(255 255 255 / 0.1);
 }
+.ring-red-300 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(252 165 165 / var(--tw-ring-opacity));
+}
+.ring-red-900 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(127 29 29 / var(--tw-ring-opacity));
+}
 .ring-opacity-5 {
   --tw-ring-opacity: 0.05;
 }
