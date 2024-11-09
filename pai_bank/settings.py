@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import dj_database_url
+
 import environ
 env = environ.Env()
 environ.Env.read_env()
@@ -30,7 +32,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -89,22 +91,25 @@ WSGI_APPLICATION = 'pai_bank.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
+# }
 
 # print("DB User:", env("DB_USER"))
 # print("DB Password:", env("DB_PASSWORD"))
 
 
-
+DATABASES = {
+    'default': dj_database_url.config(
+    default='postgresql://pai_bank_user:xmcbc5IUnmo5Tsq3bqZBDVmyaTEs3dzP@dpg-csnlei8gph6c73bgl30g-a.oregon-postgres.render.com/pai_bank',
+    )}
 
 
 # Password validation
