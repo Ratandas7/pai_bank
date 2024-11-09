@@ -1,0 +1,449 @@
+{% extends "core/base.html" %}
+{% block title %}Register{% endblock title %}
+{% block content %}
+
+<section>
+{% if form.non_field_errors %}
+
+{% for error in form.non_field_errors %}
+
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+        <p class="font-bold">Error!</p>
+        <p class="block sm:inline">{{error}}</p>
+    </div>
+
+{% endfor %}
+
+{% endif %}
+
+
+{% comment %} {{request.user}} {% endcomment %}
+
+
+<div class="bg-white px-6 my-14 sm:my-10 lg:px-8">
+
+    <div class="shadow-md mx-auto max-w-3xl p-10">
+
+        <div class="mx-auto max-w-2xl text-center">
+            <h2 class="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Register Account</h2>
+        </div>
+
+            <form method="post" class="mx-auto mt-16 max-w-2xl sm:mt-20">
+                {% csrf_token %}
+
+
+                {% for hidden_field in form.hidden_fields %}
+                
+                    {{hidden_field.errors}}
+                    {{hidden_field}}
+                
+                {% endfor %}
+
+                
+                <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+
+                    <div class="sm:col-span-2">
+
+                        <label for="{{form.username.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.username.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            <input type="text" name="{{form.username.html_name}}" id="{{form.username.id_for_label}}" value="{{form.username.value|default_if_none:''}}" autocomplete="username" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                        
+                            {% comment %} {{form.username}} {% endcomment %}
+
+                        </div>
+
+                        {% if form.username.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.username.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="{{form.first_name.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.first_name.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            {% comment %} <input type="text" name="{{form.first_name.html_name}}" id="{{form.first_name.id_for_label}}" value="{{form.first_name.value|default_if_none:''}}" autocomplete="given-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"> {% endcomment %}
+
+                            {{form.first_name}}
+
+                        </div>
+
+                        {% if form.first_name.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.first_name.errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="{{form.last_name.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.last_name.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            {% comment %} <input type="text" name="{{form.last_name.html_name}}" id="{{form.last_name.id_for_label}}" value="{{form.last_name.value|default_if_none:''}}" autocomplete="family-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"> {% endcomment %}
+
+                            {{form.last_name}}
+
+                        </div>
+
+                        {% if form.last_name.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.last_name.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="sm:col-span-2">
+
+                        <label for="{{form.email.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.email.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            {% comment %} <input type="email" name="{{form.email.html_name}}" id="{{form.email.id_for_label}}" value="{{form.email.value|default_if_none:''}}" autocomplete="email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"> {% endcomment %}
+
+                            {{form.email}}
+
+                        </div>
+
+                        {% if form.email.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.email.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+                        
+                        {% endif %}
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="{{form.account_type.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.account_type.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            {% comment %} <select id="{{form.account_type.id_for_label}}" name="{{form.account_type.html_name}}" autocomplete="account-type" class="block w-full rounded-md border-0 px-3.5 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 font-medium">
+
+                                {% for value, display in form.account_type.field.choices %}
+                                
+                                    <option value="{{value}}" {% if form.account_type.value == value %}selected{% endif %} >
+                                        {{display}}
+                                    </option>
+
+                                {% endfor %}
+
+                            </select> {% endcomment %}
+
+                            {{form.account_type}}
+
+                        </div>
+
+                        {% if form.account_type.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.account_type.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+                        
+                        {% endif %}
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="{{form.gender_type.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.gender_type.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            {% comment %} <select id="{{form.gender_type.id_for_label}}" name="{{form.gender_type.html_name}}" autocomplete="gender-type" class="block w-full rounded-md border-0 px-3.5 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 font-medium">
+
+                                {% for value, display in form.gender_type.field.choices %}
+                                
+                                    <option value="{{value}}" {% if form.gender_type.value == value %}selected{% endif %} >
+                                        {{display}}
+                                    </option>
+
+                                {% endfor %}
+
+                            </select> {% endcomment %}
+
+                            {{form.gender_type}}
+
+                        </div>
+
+                        {% if form.gender_type.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.gender_type.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+                        
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <div>
+
+                        <label for="{{form.birth_date.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.birth_date.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            <input type="date" name="{{form.birth_date.html_name}}" id="{{form.birth_date.id_for_label}}" value="{{form.birth_date.value}}" autocomplete="birth-date" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+
+                            {% comment %} {{form.birth_date}} {% endcomment %}
+
+                        </div>
+
+                        {% if form.birth_date.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.birth_date.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    {% for hidden_field in form.hidden_fields %}
+                
+                        {{hidden_field.errors}}
+                        {{hidden_field}}
+                
+                    {% endfor %}
+
+
+                    <div>
+
+                        <label for="{{form.country.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.country.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            <input type="text" name="{{form.country.html_name}}" id="{{form.country.id_for_label}}" value="{{form.country.value|default_if_none:''}}" autocomplete="country" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+
+                            {% comment %} {{form.country}} {% endcomment %}
+
+                        </div>
+
+                        {% if form.country.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.country.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <div class="sm:col-span-2">
+
+                        <label for="{{form.street_address.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                            {{form.street_address.label}}
+                        </label>
+
+                        <div class="mt-2.5">
+
+                            <textarea type="text" name="{{form.street_address.html_name}}" id="{{form.street_address.id_for_label}}" value="{{form.street_address.value}}" rows="2" autocomplete="street-address" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"></textarea>
+                            
+                            {% comment %} {{form.street_address}} {% endcomment %}
+
+                        </div>
+
+
+                        {% if form.street_address.errors %}
+                        
+                            <div class="text-red-600 text-sm">
+                                {% for error in form.street_address.errors %}
+                                    <p>{{error}}</p>
+                                {% endfor %}
+                            </div>
+                        
+                        {% endif %}
+
+                    </div>
+                
+
+
+
+                <div>
+
+                    <label for="{{form.city.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                        {{form.city.label}}
+                    </label>
+
+                    <div class="mt-2.5">
+
+                        <input type="text" name="{{form.city.html_name}}" id="{{form.city.id_for_label}}" value="{{form.city.value|default_if_none:''}}" autocomplete="city" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+
+                        {% comment %} {{form.city}} {% endcomment %}
+
+                    </div>
+
+                    {% if form.city.errors %}
+                    
+                        <div class="text-red-600 text-sm">
+                            {% for error in form.city.errors %}
+                                <p>{{error}}</p>
+                            {% endfor %}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <div>
+
+                    <label for="{{form.postal_code.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                        {{form.postal_code.label}}
+                    </label>
+
+                    <div class="mt-2.5">
+
+                        <input type="number" name="{{form.postal_code.html_name}}" id="{{form.postal_code.id_for_label}}" value="{{form.postal_code.value}}" autocomplete="postal-code" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+
+                        {% comment %} {{form.postal_code}} {% endcomment %}
+
+                    </div>
+
+                    {% if form.postal_code.errors %}
+                    
+                        <div class="text-red-600 text-sm">
+                            {% for error in form.postal_code.errors %}
+                                <p>{{error}}</p>
+                            {% endfor %}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <div>
+
+                    <label for="{{form.password1.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                        {{form.password1.label}}
+                    </label>
+
+                    <div class="mt-2.5">
+
+                        {% comment %} <input type="password" name="{{form.password1.html_name}}" id="{{form.password1.id_for_label}}" value="{{form.password1.value|default_if_none:''}}" autocomplete="password1" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"> {% endcomment %}
+
+                        {{form.password1}}
+
+                    </div>
+
+                    {% if form.password1.errors %}
+                    
+                        <div class="text-red-600 text-sm">
+                            {% for error in form.password1.errors %}
+                                <p>{{error}}</p>
+                            {% endfor %}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <div>
+
+                    <label for="{{form.password2.id_for_label}}" class="block text-sm/6 font-semibold text-gray-900">
+                        {{form.password2.label}}
+                    </label>
+
+                    <div class="mt-2.5">
+
+                        {% comment %} <input type="password" name="{{form.password2.html_name}}" id="{{form.password2.id_for_label}}" value="{{form.password2.value}}" autocomplete="password2" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"> {% endcomment %}
+
+                        {{form.password2}}
+
+                    </div>
+
+                    {% if form.password2.errors %}
+                    
+                        <div class="text-red-600 text-sm">
+                            {% for error in form.password2.errors %}
+                                <p>{{error}}</p>
+                            {% endfor %}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="mt-2.5 sm:col-span-2">
+
+                    <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Register
+                    </button>
+
+                </div>
+
+            </form>
+    </div>
+    
+</div>
+</section>
+  
+  
+
+{% endblock content %}

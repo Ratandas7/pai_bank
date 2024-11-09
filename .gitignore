@@ -1,0 +1,12 @@
+*.pyc
+__pycache__
+db.sqlite3
+/.painenv
+*.env
+.vscode
+node_modules
+package-lock.json
+package.json
+postcss.config.js
+tailwind.config.js
+/info.txt

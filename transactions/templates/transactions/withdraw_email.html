@@ -1,0 +1,24 @@
+{% extends "core/core_message.html" %}
+{% block content %}
+
+
+<div class="border rounded-lg text-left shadow-xl sm:my-8 sm:w-full sm:max-w-lg">
+    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+        
+        <div class="mt-3 text-center sm:mt-0 sm:text-left">
+            <h3 class="text-base font-semibold text-gray-900">Hello, {{user.username}}</h3>
+            <div class="mt-2">
+                <p class="text-sm text-gray-500">Your Withdrawal request for ${{amount}} has been successfully completed. After deposite your total amount is ${{user.account.balance}}</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="bg-indigo-100 px-4 py-3 sm:px-6">
+        <h4 class="text-base font-normal text-gray-900">Thanks for banking with us</h4>
+        <h5 class="mt-2 text-base font-semibold text-gray-900">Pai Bank</h5>
+    </div>
+
+</div>
+
+{% endblock content %}

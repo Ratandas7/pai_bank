@@ -1,0 +1,109 @@
+{% extends "core/base.html" %}
+{% load humanize %}
+{% block title %} Transaction Report {% endblock title %}
+
+{% block content %}
+
+
+<section class="min-h-screen my-10 mx-2 sm:mx-0">
+    <div class="shadow-md mx-auto max-w-7xl px-2 sm:px-10 pb-10">
+        <div class="mx-auto max-w-2xl text-center">
+            <h2 class="text-balance text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Transaction Report</h2>
+        </div>
+    
+        <form action=" {% url "transaction_report" %} " method="get" class="mt-16 sm:mt-20 mb-10">
+            
+    
+            <div class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
+
+                <div class="flex items-center rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-gray-300">
+                    <label for="start_date" class="block text-sm font-semibold text-gray-900 mr-8">From:</label>
+
+                    <input type="date" name="start_date" id="start_date" class="block w-full appearance-none sm:text-sm outline-none">
+                </div>
+
+                <div class="flex items-center rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-gray-300">
+                    <label for="end_date" class="block text-sm font-semibold text-gray-900 mr-8">To:</label>
+
+                    <input type="date" name="end_date" id="end_date" class="block w-full appearance-none sm:text-sm outline-none">
+                </div>
+    
+                <div>
+                    <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Filter</button>
+                </div>
+            
+            </div>
+                
+        </form>
+
+        <div class="overflow-x-auto snap-x">
+            <table class="table-fixed border-collapse border border-slate-400 w-full min-w-[1000px]">
+
+                <thead>
+                    <tr class="bg-indigo-900 text-white">
+                        <th class="border border-slate-300 py-2">Date</th>
+                        <th class="border border-slate-300 py-2">Transaction Type</th>
+                        <th class="border border-slate-300 py-2">Amount</th>
+                        <th class="border border-slate-300 py-2">Balance After Transaction</th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr class="text-center bg-slate-100 hover:bg-slate-50">
+                            <td class="border border-slate-300 py-2.5">{{transaction.timestamp|date:"F d, Y h:i A"}}</td>
+                            <td class="border border-slate-300 py-2.5 font-semibold">
+                                <span class="px-3 py-1 mx-5 rounded-full block
+                                {% if transaction.get_transaction_type_display == 'Withdraw' or transaction.get_transaction_type_display == 'Loan Paid' or transaction.get_transaction_type_display == 'Money Transfer' %} text-red-700 bg-red-100
+                                {% elif transaction.get_transaction_type_display == 'Loan' %}
+                                    {% if transaction.loan_approve %}
+                                        text-green-700 bg-green-100
+                                    {% else %}
+                                        text-yellow-600 bg-yellow-100
+                                    {% endif %} 
+
+                                {% else %} text-green-700 bg-green-100
+                                {% endif %}">
+                                    {{transaction.get_transaction_type_display}}
+                                </span>
+                            </td>
+    
+                            <td class="border border-slate-300 py-2.5 font-medium">
+                                <span class=" {% if transaction.get_transaction_type_display == 'Withdraw' or transaction.get_transaction_type_display == 'Loan Paid' or transaction.get_transaction_type_display == 'Money Transfer' %} text-red-700
+                                {% elif transaction.get_transaction_type_display == 'Loan' %}
+                                    {% if transaction.loan_approve %}
+                                        text-green-700
+                                    {% else %}
+                                        text-yellow-600
+                                    {% endif %}
+                                {% else %} text-green-700
+                                {% endif %} ">
+                                    $ {{transaction.amount|floatformat:2|intcomma}}
+                                </span>
+                            </td>
+                            <td class="border border-slate-300 py-2.5 font-medium">$ {{transaction.balance_after_transaction|floatformat:2|intcomma}}</td>
+                        </tr>
+                    
+                    {% endfor %}
+                    
+                </tbody>
+    
+                <tfoot>
+                    <tr class="bg-indigo-600 text-white text-center">
+                        <th class="border border-slate-300 py-3" colspan="3">Current Balance</th>
+                        <th class="border border-slate-300 py-3 bg-indigo-950">$ {{account.balance|floatformat:2|intcomma}}</th>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+
+
+    </div>
+</section>
+  
+
+
+
+
+{% endblock content %}

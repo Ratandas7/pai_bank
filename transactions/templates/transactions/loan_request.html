@@ -1,0 +1,64 @@
+{% extends "core/base.html" %}
+{% load humanize %}
+{% block title %} Loan Report {% endblock title %}
+{% block content %}
+
+
+<section class="min-h-screen my-10 mx-2 sm:mx-0">
+    <div class="shadow-md mx-auto max-w-7xl px-2 sm:px-10 pb-10">
+        <div class="mx-auto max-w-2xl text-center">
+            <h2 class="text-balance text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">Loan Report</h2>
+        </div>
+    
+        
+
+        <div class="overflow-x-auto snap-x mt-16">
+            <table class="table-fixed border-collapse border border-slate-400 w-full min-w-[1000px]">
+
+                <thead>
+                    <tr class="bg-indigo-900 text-white">
+                        <th class="border border-slate-300 py-2">Loan ID</th>
+                        <th class="border border-slate-300 py-2">Loan Amount</th>
+                        <th class="border border-slate-300 py-2">Loan Approved</th>
+                        <th class="border border-slate-300 py-2">Action</th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    {% for loan in loans %}
+                        <tr class="text-center bg-slate-100 hover:bg-slate-50">
+                            <td class="border border-slate-300 py-2.5">{{loan.id}}</td>
+
+                            <td class="border border-slate-300 py-2.5 font-semibold">
+                                <span class=" {% if loan.loan_approve %} text-yellow-600 {% else %} text-green-700 {% endif %} ">
+                                    $ {{loan.amount|floatformat:2|intcomma}}
+                                </span>
+                            </td>
+
+                            <td class="border border-slate-300 py-2.5 font-medium">{{loan.loan_approve}}</td>
+
+                            <td class="border border-slate-300 py-2.5 font-semibold">
+
+                                {% if loan.loan_approve %}
+                                    <a class="text-yellow-950 hover:text-yellow-900 bg-yellow-400 hover:bg-yellow-200 py-1 rounded-full mx-5 block" href=' {% url "pay" loan.id %} '>Pay</a>
+                                {% else %}
+                                    <p class=" text-red-700 bg-red-100 py-1 rounded-full mx-5">Loan Pending</p>
+                                {% endif %}
+                                
+                                
+                            </td>
+    
+                        </tr>
+                    
+                    {% endfor %}
+                    
+                </tbody>
+                  
+            </table>
+        </div>
+
+    </div>
+</section>
+  
+
+{% endblock content %}
