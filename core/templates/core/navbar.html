@@ -56,7 +56,7 @@
               <div class="py-1" role="none">
                 <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
                 <a href=" {% url "profile" %} " class="block px-4 py-2 text-base/6 font-semibold text-gray-900 hover:bg-slate-50" role="menuitem" tabindex="-1" id="menu-item-0">View Profile</a>
-                <a href="#" class="block px-4 py-2 text-base/6 font-semibold text-gray-900 hover:bg-slate-50" role="menuitem" tabindex="-1" id="menu-item-1">Password Change</a>
+                <a href=" {% url "change_password" %} " class="block px-4 py-2 text-base/6 font-semibold text-gray-900 hover:bg-slate-50" role="menuitem" tabindex="-1" id="menu-item-1">Password Change</a>
                 <form method="POST" action=" {% url "logout" %} " role="none">
                   {% csrf_token %}
                   <button type="submit" class="block w-full px-4 py-2 text-left text-base/6 font-semibold text-gray-900 hover:bg-slate-50" role="menuitem" tabindex="-1" id="menu-item-3">Log out</button>
@@ -135,7 +135,7 @@
                     <div class="py-1" role="none">
                       <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
                       <a href=" {% url "profile" %} " class="block px-4 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" role="menuitem" tabindex="-1" id="menu-item-0">View Profile</a>
-                      <a href="#" class="block px-4 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" role="menuitem" tabindex="-1" id="menu-item-1">Password Change</a>
+                      <a href=" {% url "change_password" %} " class="block px-4 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" role="menuitem" tabindex="-1" id="menu-item-1">Password Change</a>
                       <form method="POST" action=" {% url "logout" %} " role="none">
                         {% csrf_token %}
                         <button type="submit" class="block w-full px-4 py-2 text-left text-base/7 font-semibold text-gray-900 hover:bg-gray-50" role="menuitem" tabindex="-1" id="menu-item-3">Log out</button>
