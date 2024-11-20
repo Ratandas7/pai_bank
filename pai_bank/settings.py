@@ -85,12 +85,12 @@ WSGI_APPLICATION = 'pai_bank.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -107,10 +107,10 @@ WSGI_APPLICATION = 'pai_bank.wsgi.application'
 # print("DB Password:", env("DB_PASSWORD"))
 
 
-DATABASES = {
-    'default': dj_database_url.config(
-    default='postgresql://pai_bank_user:xmcbc5IUnmo5Tsq3bqZBDVmyaTEs3dzP@dpg-csnlei8gph6c73bgl30g-a.oregon-postgres.render.com/pai_bank',
-    )}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#     default='postgresql://pai_bank_user:xmcbc5IUnmo5Tsq3bqZBDVmyaTEs3dzP@dpg-csnlei8gph6c73bgl30g-a.oregon-postgres.render.com/pai_bank',
+#     )}
 
 
 # Password validation
